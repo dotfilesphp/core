@@ -22,6 +22,17 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class ShellCommand extends Command
 {
+    /**
+     * @var Shell
+     */
+    private $shell;
+
+    public function __construct(?string $name = null, Shell $shell)
+    {
+        parent::__construct($name);
+        $this->shell = $shell;
+    }
+
     protected function configure()
     {
         $this
@@ -32,7 +43,6 @@ class ShellCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $shell = new Shell($this->getApplication());
-        $shell->run();
+        $this->shell->run();
     }
 }
